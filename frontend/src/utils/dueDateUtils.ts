@@ -2,7 +2,12 @@
  * Utility functions for due date status calculation and formatting
  */
 
-export type DueDateStatus = "overdue" | "due-soon" | "due-warning" | "on-track" | null;
+export type DueDateStatus =
+  | "overdue"
+  | "due-soon"
+  | "due-warning"
+  | "on-track"
+  | null;
 
 /**
  * Calculate the urgency status of a due date relative to the current time.
@@ -12,7 +17,9 @@ export type DueDateStatus = "overdue" | "due-soon" | "due-warning" | "on-track" 
  * - "on-track": due_date > now + 3 days (green)
  * - null: no due date provided
  */
-export function getDueDateStatus(dueDate: string | null | undefined): DueDateStatus {
+export function getDueDateStatus(
+  dueDate: string | null | undefined,
+): DueDateStatus {
   if (!dueDate) return null;
 
   const now = new Date();

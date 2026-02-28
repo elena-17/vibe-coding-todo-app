@@ -1,6 +1,10 @@
 import type { Item } from "../types";
 import Tag from "./Tag";
-import { getDueDateStatus, getDueDateColorClass, formatDueDate } from "../utils/dueDateUtils";
+import {
+  getDueDateStatus,
+  getDueDateColorClass,
+  formatDueDate,
+} from "../utils/dueDateUtils";
 
 interface TaskCardProps {
   item: Item;

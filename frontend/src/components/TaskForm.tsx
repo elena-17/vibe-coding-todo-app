@@ -53,7 +53,12 @@ export default function TaskForm({
     if (!name.trim()) return;
 
     const dueDateISO = dueDate ? new Date(dueDate).toISOString() : null;
-    await onSubmit({ name, description, due_date: dueDateISO, tag_ids: selectedTagIds });
+    await onSubmit({
+      name,
+      description,
+      due_date: dueDateISO,
+      tag_ids: selectedTagIds,
+    });
 
     // Reset form
     setName("");
