@@ -38,20 +38,21 @@ export function getDueDateStatus(
 }
 
 /**
- * Get the Tailwind CSS color class for a given due date status.
+ * Get the Tailwind CSS background class for a given due date status.
+ * Returns a pastel background color to be applied to the entire task card.
  */
 export function getDueDateColorClass(status: DueDateStatus): string {
   switch (status) {
     case "overdue":
-      return "text-red-600";
+      return "bg-red-100";
     case "due-soon":
-      return "text-orange-500";
+      return "bg-orange-100";
     case "due-warning":
-      return "text-yellow-500";
+      return "bg-yellow-100";
     case "on-track":
-      return "text-green-600";
+      return "bg-green-100";
     default:
-      return "text-slate-500";
+      return "bg-white";
   }
 }
 

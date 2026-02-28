@@ -25,7 +25,7 @@ export default function TaskCard({
   return (
     <article
       data-testid={`task-${item.id}`}
-      className="group rounded-lg border border-slate-200 bg-white p-3 shadow-sm hover:shadow-md cursor-grab"
+      className={`group rounded-lg border border-slate-200 ${dueDateColorClass} p-3 shadow-sm hover:shadow-md cursor-grab`}
       draggable
       onDragStart={(e) => onDragStart(e, item)}
     >
@@ -45,7 +45,7 @@ export default function TaskCard({
           {item.due_date && (
             <p
               data-testid={`due-date-${item.id}`}
-              className={`mt-1.5 text-xs font-medium ${dueDateColorClass}`}
+              className="mt-1.5 text-xs font-medium text-slate-600"
             >
               Due: {formatDueDate(item.due_date)}
             </p>

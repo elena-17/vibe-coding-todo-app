@@ -57,24 +57,24 @@ describe("getDueDateStatus", () => {
 });
 
 describe("getDueDateColorClass", () => {
-  it("returns red class for overdue", () => {
-    expect(getDueDateColorClass("overdue")).toBe("text-red-600");
+  it("returns red background class for overdue", () => {
+    expect(getDueDateColorClass("overdue")).toBe("bg-red-100");
   });
 
-  it("returns orange class for due-soon", () => {
-    expect(getDueDateColorClass("due-soon")).toBe("text-orange-500");
+  it("returns orange background class for due-soon", () => {
+    expect(getDueDateColorClass("due-soon")).toBe("bg-orange-100");
   });
 
-  it("returns yellow class for due-warning", () => {
-    expect(getDueDateColorClass("due-warning")).toBe("text-yellow-500");
+  it("returns yellow background class for due-warning", () => {
+    expect(getDueDateColorClass("due-warning")).toBe("bg-yellow-100");
   });
 
-  it("returns green class for on-track", () => {
-    expect(getDueDateColorClass("on-track")).toBe("text-green-600");
+  it("returns green background class for on-track", () => {
+    expect(getDueDateColorClass("on-track")).toBe("bg-green-100");
   });
 
-  it("returns slate class for null status", () => {
-    expect(getDueDateColorClass(null)).toBe("text-slate-500");
+  it("returns white background class for null status", () => {
+    expect(getDueDateColorClass(null)).toBe("bg-white");
   });
 });
 
