@@ -7,6 +7,7 @@ interface TaskFormProps {
   onSubmit: (data: {
     name: string;
     description: string;
+    due_date: string | null;
     tag_ids: number[];
   }) => Promise<void>;
   onCancel: () => void;
@@ -34,23 +35,43 @@ export default function TaskForm({
       ? initialData.tags?.map((tag) => tag.id) || []
       : [],
   );
+  const [dueDate, setDueDate] = useState<string>(() => {
+    if (mode === "edit" && initialData?.due_date) {
+      const date = new Date(initialData.due_date);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    return "";
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    await onSubmit({ name, description, tag_ids: selectedTagIds });
+    const dueDateISO = dueDate ? new Date(dueDate).toISOString() : null;
+    await onSubmit({
+      name,
+      description,
+      due_date: dueDateISO,
+      tag_ids: selectedTagIds,
+    });
 
     // Reset form
     setName("");
     setDescription("");
     setSelectedTagIds([]);
+    setDueDate("");
   };
 
   const handleCancel = () => {
     setName("");
     setDescription("");
     setSelectedTagIds([]);
+    setDueDate("");
     onCancel();
   };
 
@@ -89,6 +110,22 @@ export default function TaskForm({
           placeholder="Enter description"
           rows={3}
           className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="task-due-date"
+          className="block text-sm font-medium text-slate-700 mb-1"
+        >
+          Due date (optional)
+        </label>
+        <input
+          id="task-due-date"
+          data-testid="task-due-date-input"
+          type="datetime-local"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
       </div>
       <div>

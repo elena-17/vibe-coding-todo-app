@@ -39,6 +39,7 @@ describe("TaskForm", () => {
       expect(onSubmit).toHaveBeenCalledWith({
         name: "Test Task",
         description: "",
+        due_date: null,
         tag_ids: [],
       });
     });
@@ -63,6 +64,7 @@ describe("TaskForm", () => {
       expect(onSubmit).toHaveBeenCalledWith({
         name: "Test Task",
         description: "Test Description",
+        due_date: null,
         tag_ids: [],
       });
     });

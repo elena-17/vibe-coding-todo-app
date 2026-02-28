@@ -1,5 +1,10 @@
 import type { Item } from "../types";
 import Tag from "./Tag";
+import {
+  getDueDateStatus,
+  getDueDateColorClass,
+  formatDueDate,
+} from "../utils/dueDateUtils";
 
 interface TaskCardProps {
   item: Item;
@@ -14,10 +19,13 @@ export default function TaskCard({
   onEdit,
   onDragStart,
 }: TaskCardProps) {
+  const dueDateStatus = getDueDateStatus(item.due_date);
+  const dueDateColorClass = getDueDateColorClass(dueDateStatus);
+
   return (
     <article
       data-testid={`task-${item.id}`}
-      className="group rounded-lg border border-slate-200 bg-white p-3 shadow-sm hover:shadow-md cursor-grab"
+      className={`group rounded-lg border border-slate-200 ${dueDateColorClass} p-3 shadow-sm hover:shadow-md cursor-grab`}
       draggable
       onDragStart={(e) => onDragStart(e, item)}
     >
@@ -33,6 +41,14 @@ export default function TaskCard({
                 <Tag key={tag.id} name={tag.name} color={tag.color} />
               ))}
             </div>
+          )}
+          {item.due_date && (
+            <p
+              data-testid={`due-date-${item.id}`}
+              className="mt-1.5 text-xs font-medium text-slate-600"
+            >
+              Due: {formatDueDate(item.due_date)}
+            </p>
           )}
         </div>
         <div className="flex flex-col gap-1.5">
