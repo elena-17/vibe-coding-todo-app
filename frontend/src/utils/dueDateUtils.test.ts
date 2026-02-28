@@ -47,7 +47,7 @@ describe("getDueDateStatus", () => {
     expect(getDueDateStatus("2024-06-10T12:00:00Z")).toBe("on-track");
   });
 
-  it("returns 'overdue' when due date is exactly now", () => {
+  it("returns 'due-soon' when due date is exactly now", () => {
     vi.useFakeTimers();
     const now = new Date("2024-06-01T12:00:00Z");
     vi.setSystemTime(now);
